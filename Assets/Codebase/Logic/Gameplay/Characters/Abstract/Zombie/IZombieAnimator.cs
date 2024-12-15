@@ -1,5 +1,4 @@
-﻿
-namespace Codebase.Logic.Gameplay.Characters.Abstract.Zombie
+﻿namespace Codebase.Logic.Gameplay.Characters.Abstract.Zombie
 {
     public interface IZombieAnimator
     {

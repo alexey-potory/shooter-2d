@@ -240,7 +240,7 @@ Rigidbody2D:
   m_Mass: 3.6287796
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 10
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 6622459083221140745}
   _shootingTarget: {fileID: 1160503842829951049}
-  _healthBar: {fileID: 6329586370797290481}
+  _healthBarBehaviour: {fileID: 6329586370797290481}
   _maxHealth: 3
 --- !u!114 &6622459083221140745
 MonoBehaviour:
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44cb6e05e7d5461584d7a8156d033606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movement: {fileID: 817649189498619539}
+  _movementBehaviour: {fileID: 817649189498619539}
 --- !u!114 &-3070111568726117276
 MonoBehaviour:
   m_ObjectHideFlags: 0

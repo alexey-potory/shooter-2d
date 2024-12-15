@@ -21,11 +21,9 @@ namespace Codebase.Logic.Gameplay.Loot
         }
 
         [Inject]
-        public void Construct(AmmoSystem ammoSystem)
-        {
+        public void Construct(AmmoSystem ammoSystem) => 
             _ammoSystem = ammoSystem;
-        }
-        
+
         protected override void OnLootPicked() => 
             _ammoSystem.CurrentAmmo += _count;
     }

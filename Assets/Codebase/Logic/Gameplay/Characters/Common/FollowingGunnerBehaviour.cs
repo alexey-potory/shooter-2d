@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
-namespace Codebase.Logic.Gameplay.Characters.Implementations.Zombie
+namespace Codebase.Logic.Gameplay.Characters.Common
 {
-    public class ZombieFollowing : MonoBehaviour
+    public class FollowingGunnerBehaviour : MonoBehaviour
     {
-        [SerializeField] private CharacterMovement _movement;
+        [FormerlySerializedAs("_movement")] [SerializeField] private CharacterMovementBehaviour _movementBehaviour;
         
         private Transform _target;
 
@@ -17,7 +18,7 @@ namespace Codebase.Logic.Gameplay.Characters.Implementations.Zombie
                 return;
             
             var direction = (_target.position - transform.position).x;
-            _movement.SetDirection(direction);
+            _movementBehaviour.SetDirection(direction);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Codebase.Logic.Gameplay.Characters.Implementations.Zombie
 {
-    public class ZombieHealthBar : MonoBehaviour
+    public class ZombieHealthBarBehaviour : MonoBehaviour
     {
         [SerializeField] private RectTransform _healthBarRect;
 

@@ -134,6 +134,10 @@ GameObject:
   - component: {fileID: 41491520}
   - component: {fileID: 41491519}
   - component: {fileID: 41491521}
+  - component: {fileID: 41491525}
+  - component: {fileID: 41491524}
+  - component: {fileID: 41491523}
+  - component: {fileID: 41491522}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -156,6 +160,10 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 41491521}
+  - {fileID: 41491525}
+  - {fileID: 41491524}
+  - {fileID: 41491523}
+  - {fileID: 41491522}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -200,15 +208,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b4bbce51ca4744b479072e26c3c928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameOverScreenPrefab: {fileID: 4836915073356881379, guid: 9d2cf34dec6d2b94db30be5c6a262e26, type: 3}
+  _cameraHandler: {fileID: 443443918}
+--- !u!114 &41491522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41491518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebfee0fc35174282a7435af2da9a3a24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gunnerSpawnPoint: {fileID: 2062054313}
+--- !u!114 &41491523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41491518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6da5469f1b7243ee98129412d3dd5c45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &41491524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41491518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa893808d1734646a7d5c84fa90085a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &41491525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41491518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16fb70e89d4a4de885044e4f4fe02e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _gunnerPrefab: {fileID: -34933774791256493, guid: ed6a28de165a45346b2c87baabbe33c2, type: 3}
   _projectilePrefab: {fileID: 4360903836264085363, guid: 519fa8f150975694988706feda79b875, type: 3}
   _zombiePrefabs:
   - {fileID: 2026543169509962265, guid: b36424739ad29e8418b7efe185843f48, type: 3}
   - {fileID: 4287138451533560912, guid: 5a7adad57e510ee479f9b84d5640b76a, type: 3}
   - {fileID: 3584842892152502480, guid: ab19f73f01584ce419f98659c94fbaba, type: 3}
-  _gameOverScreenPrefab: {fileID: 4836915073356881379, guid: 9d2cf34dec6d2b94db30be5c6a262e26, type: 3}
-  _camera: {fileID: 443443918}
-  _gunnerSpawnPoint: {fileID: 2062054313}
 --- !u!1 &54165762
 GameObject:
   m_ObjectHideFlags: 0
@@ -4278,7 +4334,7 @@ Transform:
   m_GameObject: {fileID: 2062054311}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.33, z: 0}
+  m_LocalPosition: {x: 0, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

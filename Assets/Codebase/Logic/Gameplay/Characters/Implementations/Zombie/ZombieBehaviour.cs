@@ -1,6 +1,8 @@
 ﻿using System;
 using Codebase.Logic.Gameplay.Characters.Abstract.Zombie;
+using Codebase.Logic.Gameplay.Characters.Common;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Codebase.Logic.Gameplay.Characters.Implementations.Zombie
 {
@@ -8,8 +10,8 @@ namespace Codebase.Logic.Gameplay.Characters.Implementations.Zombie
     {
         [Header("Components")]
         [SerializeField] private ZombieAnimator _animator;
-        [SerializeField] private ZombieShootingTarget _shootingTarget;
-        [SerializeField] private ZombieHealthBar _healthBar;
+        [SerializeField] private ShootingTargetBehaviour _shootingTarget;
+        [SerializeField] private ZombieHealthBarBehaviour _healthBarBehaviour;
         
         [Header("Settings")]
         [SerializeField] private int _maxHealth;
@@ -31,7 +33,7 @@ namespace Codebase.Logic.Gameplay.Characters.Implementations.Zombie
             _currentHealth = _maxHealth;
             _animator.SetAnimation(ZombieAnimation.Walking);
             
-            _healthBar.SetValue(1);
+            _healthBarBehaviour.SetValue(1);
         }
 
         private void OnDestroy()
@@ -50,7 +52,7 @@ namespace Codebase.Logic.Gameplay.Characters.Implementations.Zombie
                 return;
             }
             
-            _healthBar.SetValue((float)_currentHealth / _maxHealth);
+            _healthBarBehaviour.SetValue((float)_currentHealth / _maxHealth);
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
 using Codebase.Logic.Factories;
-using Codebase.Logic.Gameplay.Camera;
+using Codebase.Logic.Gameplay.Camera.Abstract;
+using Codebase.Logic.Gameplay.Characters.Common;
+using Codebase.Logic.Gameplay.Characters.Implementations.Gunner;
 using Codebase.Logic.Gameplay.Characters.Implementations.Zombie;
 using UnityEngine;
-using UnityEngine.Pool;
 using Zenject;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -19,9 +20,11 @@ namespace Codebase.Logic.Gameplay.Spawn
         };
         
         private readonly CharacterFactory _factory;
-        private readonly GameplayCameraBehaviour _cameraBehaviour;
-
-        private Transform _enemyParent = new GameObject("Enemies").transform;
+        
+        private readonly IGameplayCameraHandler _gameplayCameraHandler;
+        private readonly GunnerBehaviour _gunner;
+        
+        private readonly Transform _enemyParent = new GameObject("Enemies").transform;
         
         private const float OffscreenSpawnOffset = 0.5f;
 
@@ -32,10 +35,12 @@ namespace Codebase.Logic.Gameplay.Spawn
         
         public State CurrentState { get; private set; } = State.Waiting;
 
-        public EnemySpawnSystem(CharacterFactory factory, GameplayCameraBehaviour cameraBehaviour)
+        public EnemySpawnSystem(CharacterFactory factory, 
+            IGameplayCameraHandler gameplayCameraHandler, GunnerBehaviour gunner)
         {
             _factory = factory;
-            _cameraBehaviour = cameraBehaviour;
+            _gameplayCameraHandler = gameplayCameraHandler;
+            _gunner = gunner;
         }
 
         public void SetState(State currentState) => CurrentState = currentState;
@@ -60,7 +65,7 @@ namespace Codebase.Logic.Gameplay.Spawn
 
         private void SpawnEnemy()
         {
-            var bounds = _cameraBehaviour.Bounds;
+            var bounds = _gameplayCameraHandler.Bounds;
             
             if (!bounds.HasValue)
                 return;
@@ -88,6 +93,11 @@ namespace Codebase.Logic.Gameplay.Spawn
             var enemy = _factory.CreateZombie();
             enemy.transform.SetParent(_enemyParent);
             enemy.Killed += OnEnemyKilled;
+            
+            var followingComponent = enemy.GetComponent<FollowingGunnerBehaviour>();
+            
+            if (followingComponent)
+                followingComponent.SetTarget(_gunner.transform);
             
             return enemy;
         }

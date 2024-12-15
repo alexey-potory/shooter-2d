@@ -1,7 +1,7 @@
 ﻿using System;
 using Codebase.Logic.Gameplay.Characters.Abstract.Gunner;
+using Codebase.Logic.Gameplay.Characters.Common;
 using Codebase.Logic.Gameplay.Characters.Implementations.Zombie;
-using Codebase.Logic.Gameplay.Shooting;
 using Codebase.Logic.Input;
 using UnityEngine;
 using Zenject;
@@ -10,21 +10,17 @@ namespace Codebase.Logic.Gameplay.Characters.Implementations.Gunner
 {
     public class GunnerBehaviour : MonoBehaviour
     {
-        [SerializeField] private GunnerAnimator _gunnerAnimator;
-        [SerializeField] private GunnerShooting _gunnerShooting;
-        [SerializeField] private CharacterMovement _characterMovement;
+        [SerializeField] private GunnerAnimator _animator;
+        [SerializeField] private GunnerShootingBehaviour _shooting;
+        [SerializeField] private CharacterMovementBehaviour _movement;
         
         private IPlayerInput _playerInput;
-        private ShootingSystem _shootingSystem;
 
         public event Action EnemyTouched;
 
         [Inject]
-        public void Construct(IPlayerInput playerInput, ShootingSystem shootingSystem)
-        {
+        public void Construct(IPlayerInput playerInput) => 
             _playerInput = playerInput;
-            _shootingSystem = shootingSystem;
-        }
 
         private void Update()
         {
@@ -32,43 +28,19 @@ namespace Codebase.Logic.Gameplay.Characters.Implementations.Gunner
             
             var movementDirection = _playerInput.MovementDirection;
 
-            if (_playerInput.IsBursting)
+            if (_shooting.CanShoot && (_playerInput.IsSingleShot || 
+                _playerInput.IsBursting))
             {
-                PerformBurstShooting();
                 currentAnimation = GunnerAnimation.Shooting;
+                _shooting.Shoot();
             }
-            else if (_playerInput.IsSingleShot)
-            {
-                PerformSingleShot();
-                currentAnimation = GunnerAnimation.Shooting;
-            }
-
-            _characterMovement.SetDirection(movementDirection);
+            
+            _movement.SetDirection(movementDirection);
             
             if (movementDirection.HasValue) 
                 currentAnimation = GunnerAnimation.Running;
 
-            _gunnerAnimator.SetAnimation(currentAnimation);
-        }
-
-        private void PerformSingleShot()
-        {
-            var direction = Mathf.Abs(transform.rotation.y) < Mathf.Epsilon ? 1 : -1;
-            var position = _gunnerShooting.ShootingPoint.position;
-
-            _shootingSystem.Shoot(position, direction, _gunnerShooting.BulletSpeed);
-        }
-        
-        private void PerformBurstShooting()
-        {
-            if (_gunnerShooting.OnTimeout)
-                return;
-                
-            var direction = Mathf.Abs(transform.rotation.y) < Mathf.Epsilon ? 1 : -1;
-            var position = _gunnerShooting.ShootingPoint.position;
-
-            _shootingSystem.Shoot(position, direction, _gunnerShooting.BulletSpeed);
-            _gunnerShooting.SetTimeout();
+            _animator.SetAnimation(currentAnimation);
         }
 
         private void OnCollisionEnter2D(Collision2D other)

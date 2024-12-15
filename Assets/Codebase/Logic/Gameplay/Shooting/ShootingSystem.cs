@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Codebase.Logic.Factories;
-using Codebase.Logic.Gameplay.Camera;
+using Codebase.Logic.Gameplay.Camera.Abstract;
+using Codebase.Logic.Gameplay.Shooting.Abstract;
 using UnityEngine;
 using UnityEngine.Pool;
 using Zenject;
@@ -10,7 +11,7 @@ namespace Codebase.Logic.Gameplay.Shooting
     public class ShootingSystem : ITickable
     {
         private readonly ProjectileFactory _factory;
-        private readonly GameplayCameraBehaviour _camera;
+        private readonly IGameplayCameraHandler _cameraHandler;
         private readonly AmmoSystem _ammoSystem;
 
         private readonly IObjectPool<ProjectileBehaviour> _pool;
@@ -18,10 +19,10 @@ namespace Codebase.Logic.Gameplay.Shooting
 
         private readonly GameObject _poolObject = new("Bullets");
 
-        public ShootingSystem(ProjectileFactory factory, GameplayCameraBehaviour camera, AmmoSystem ammoSystem)
+        public ShootingSystem(ProjectileFactory factory, IGameplayCameraHandler cameraHandler, AmmoSystem ammoSystem)
         {
             _factory = factory;
-            _camera = camera;
+            _cameraHandler = cameraHandler;
             _ammoSystem = ammoSystem;
 
             _pool = new ObjectPool<ProjectileBehaviour>(OnProjectileCreate, OnProjectileGet, OnProjectileRelease, maxSize: 10);
@@ -41,7 +42,7 @@ namespace Codebase.Logic.Gameplay.Shooting
 
         public void Tick()
         {
-            var bounds = _camera.Bounds;
+            var bounds = _cameraHandler.Bounds;
             
             if (!bounds.HasValue)
                 return;
@@ -71,7 +72,7 @@ namespace Codebase.Logic.Gameplay.Shooting
             return bullet;
         }
 
-        private void OnProjectileHitTarget(ProjectileBehaviour source, ShootingTarget target)
+        private void OnProjectileHitTarget(ProjectileBehaviour source, IShootingTarget target)
         {
             Release(source);
             target.OnShot();

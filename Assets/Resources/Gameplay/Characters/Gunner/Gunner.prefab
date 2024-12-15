@@ -214,9 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df5a1eba4ed9420d8b8425fe5ad5d66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gunnerAnimator: {fileID: 5888659794160095837}
-  _gunnerShooting: {fileID: 7837887128505632945}
-  _characterMovement: {fileID: 2429326811938968709}
+  _animator: {fileID: 5888659794160095837}
+  _shooting: {fileID: 7837887128505632945}
+  _movement: {fileID: 2429326811938968709}
 --- !u!114 &7837887128505632945
 MonoBehaviour:
   m_ObjectHideFlags: 0

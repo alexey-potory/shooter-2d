@@ -1,19 +1,31 @@
-﻿using System;
-using Cinemachine;
+﻿using Cinemachine;
+using Codebase.Logic.Gameplay.Camera.Abstract;
+using Codebase.Logic.Gameplay.Characters.Implementations.Gunner;
 using UnityEngine;
+using Zenject;
 
-namespace Codebase.Logic.Gameplay.Camera
+namespace Codebase.Logic.Gameplay.Camera.Implementation
 {
     [RequireComponent(typeof(CinemachineVirtualCamera))]
-    public class GameplayCameraBehaviour : MonoBehaviour
+    public class GameplayCameraHandlerBehaviour : MonoBehaviour, IGameplayCameraHandler
     {
         [SerializeField] private CinemachineVirtualCamera _virtualCamera;
         [SerializeField] private UnityEngine.Camera _realCamera;
-
-        public void SetFollow(Transform target) => 
-            _virtualCamera.Follow = target;
+        
+        private GunnerBehaviour _gunner;
 
         public Bounds? Bounds { get; private set; }
+
+        [Inject]
+        public void Construct(GunnerBehaviour gunner)
+        {
+            _gunner = gunner;
+        }
+
+        private void Start()
+        {
+            _virtualCamera.Follow = _gunner.transform;
+        }
 
         private void Update()
         {

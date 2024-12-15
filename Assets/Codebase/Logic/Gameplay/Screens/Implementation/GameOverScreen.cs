@@ -1,10 +1,11 @@
 ﻿using System;
+using Codebase.Logic.Gameplay.Screens.Abstract;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Codebase.Logic.Gameplay.Screens
+namespace Codebase.Logic.Gameplay.Screens.Implementation
 {
-    public class GameOverScreen : MonoBehaviour
+    public class GameOverScreen : MonoBehaviour, IGameOverScreen
     {
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _exitButton;
@@ -12,6 +13,9 @@ namespace Codebase.Logic.Gameplay.Screens
         public event Action RestartClicked;
         public event Action ExitClicked;
         
+        public void Show() => gameObject.SetActive(true);
+        public void Hide() => gameObject.SetActive(false);
+
         private void Awake()
         {
             _restartButton.onClick.AddListener(OnRestartClick);

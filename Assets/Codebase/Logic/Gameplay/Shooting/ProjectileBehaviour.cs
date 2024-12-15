@@ -1,4 +1,5 @@
 ﻿using System;
+using Codebase.Logic.Gameplay.Shooting.Abstract;
 using UnityEngine;
 
 namespace Codebase.Logic.Gameplay.Shooting
@@ -8,7 +9,7 @@ namespace Codebase.Logic.Gameplay.Shooting
         public float Direction { get; private set; }
         public float Speed { get; private set; }
 
-        public event Action<ProjectileBehaviour, ShootingTarget> HitTarget;
+        public event Action<ProjectileBehaviour, IShootingTarget> HitTarget;
 
         public void SetDirection(float direction) => 
             Direction = Mathf.Sign(direction);
@@ -18,9 +19,9 @@ namespace Codebase.Logic.Gameplay.Shooting
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var target = other.GetComponent<ShootingTarget>();
+            var target = other.GetComponent<IShootingTarget>();
             
-            if (!target)
+            if (!(target as MonoBehaviour))
                 return;
             
             HitTarget?.Invoke(this, target);
