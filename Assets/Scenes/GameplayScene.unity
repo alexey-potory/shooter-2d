@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 41491524}
   - component: {fileID: 41491523}
   - component: {fileID: 41491522}
+  - component: {fileID: 41491526}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -210,6 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameOverScreenPrefab: {fileID: 4836915073356881379, guid: 9d2cf34dec6d2b94db30be5c6a262e26, type: 3}
   _cameraHandler: {fileID: 443443918}
+  _playerInput: {fileID: 41491526}
 --- !u!114 &41491522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +267,19 @@ MonoBehaviour:
   - {fileID: 2026543169509962265, guid: b36424739ad29e8418b7efe185843f48, type: 3}
   - {fileID: 4287138451533560912, guid: 5a7adad57e510ee479f9b84d5640b76a, type: 3}
   - {fileID: 3584842892152502480, guid: ab19f73f01584ce419f98659c94fbaba, type: 3}
+--- !u!114 &41491526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41491518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70f4342c55ac46a7897bc26baa563915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputAction: {fileID: -944628639613478452, guid: 2e7ff18dd2a45ca45bcf9df4fa724aee, type: 3}
 --- !u!1 &54165762
 GameObject:
   m_ObjectHideFlags: 0
